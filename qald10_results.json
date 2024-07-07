@@ -1,0 +1,216 @@
+{
+    "302": {
+        "question": {
+            "language": "en",
+            "string": "Which diseases can be caused by smoking ?"
+        },
+        "answer": [
+            "myocardial infarction",
+            "pneumonia",
+            "tuberculosis",
+            "Crohn's disease",
+            "pulmonary emphysema",
+            "chronic obstructive pulmonary disease",
+            "lung cancer"
+        ],
+        "predicted_answer": ": : lung cancer, chronic obstructive pulmonary disease, heart disease, stroke, and respiratory infections",
+        "score": 0.0
+    },
+    "218": {
+        "question": {
+            "language": "en",
+            "string": "What is the title of the 2020 released movie in which Carey Mulligan was the main actress?"
+        },
+        "answer": [
+            "Promising Young Woman"
+        ],
+        "predicted_answer": ": : Promising Young Woman",
+        "score": 0.0
+    },
+    "389": {
+        "question": {
+            "language": "en",
+            "string": "In what country is the Kandahar-downhill?"
+        },
+        "answer": [
+            "Germany"
+        ],
+        "predicted_answer": ": : The location of the Kandahar-downhill competition is unknown.",
+        "score": 0.0
+    },
+    "4": {
+        "question": {
+            "language": "en",
+            "string": "among the other representative work of the author of hunter x hunter, which one is talking about middle school student?"
+        },
+        "answer": [
+            "Yu Yu Hakusho"
+        ],
+        "predicted_answer": ": : Hunter \u00d7 Hunter",
+        "score": 0.0
+    },
+    "130": {
+        "question": {
+            "language": "en",
+            "string": "In which country did the United Fruit Company have their headquarters?"
+        },
+        "answer": [
+            "United States of America"
+        ],
+        "predicted_answer": ": : United States of America",
+        "score": 0.0
+    },
+    "374": {
+        "question": {
+            "language": "en",
+            "string": "which desert is bigger, sahara desert or arabian desert?"
+        },
+        "answer": [
+            "Sahara"
+        ],
+        "predicted_answer": ": : Sahara Desert",
+        "score": 0.0,
+        "kg": "\nKG Entities:\n\tQ6583: Sahara - desert on the African continent\n\tQ208299: Arabian Desert - desert located in Western Asia\n\nKG EDGES:\nSahara:\n\thas area: (count 1)\n\t\t9200000\nArabian Desert:\n\thas area: (count 1)\n\t\t2330000\n",
+        "trajectory": [
+            "EXPAND_KG: : I should search for the size of the Sahara Desert and the Arabian Desert.",
+            "SELECT_ENTITIES: ['Q6583', 'Q208299']",
+            "SELECT_RELATION: P2046 - has area",
+            "Observation: 0 new entities, 2 new edges added",
+            "EXPAND_KG: : I should search for the exact area of the Sahara Desert and the Arabian Desert.",
+            "SELECT_ENTITIES: ['Q6583', 'Q208299']",
+            "SELECT_RELATION: P2046 - has area",
+            "Observation: 0 new entities, 0 new edges added",
+            "ANSWER: : Sahara Desert"
+        ]
+    },
+    "262": {
+        "question": {
+            "language": "en",
+            "string": "When was the beginning of Romanticism ?"
+        },
+        "answer": [
+            "1800-01-01T00:00:00Z"
+        ],
+        "predicted_answer": ": : 1800-01-01T00:00:00Z",
+        "score": 0.0,
+        "kg": "\nKG Entities:\n\tQ37068: Romanticism - artistic, literary, musical, and intellectual movement\n\nKG EDGES:\nRomanticism:\n\thas start time: (count 1)\n\t\t1800-01-01T00:00:00Z\n",
+        "trajectory": [
+            "THINK: : To determine the beginning of Romanticism, I should start by recalling key information about the movement. Romanticism was a cultural movement that originated in Europe, particularly in the late 18th and early 19th centuries. It emerged as a reaction against the Industrial Revolution and the Enlightenment's emphasis on reason and rationality. Romanticism celebrated emotion, individualism, and the sublime in art, literature, music, and philosophy. ",
+            "EXPAND_KG: : I should search for the key figures or events associated with the beginning of Romanticism.",
+            "SELECT_ENTITIES: ['Q37068']",
+            "SELECT_RELATION: P580 - has start time",
+            "Observation: 0 new entities, 1 new edges added",
+            "EXPAND_KG: : I will search for key figures or events associated with the beginning of Romanticism.",
+            "SELECT_ENTITIES: ['Q37068']",
+            "SELECT_RELATION: P580 - has start time",
+            "Observation: 0 new entities, 0 new edges added",
+            "ANSWER: : 1800-01-01T00:00:00Z"
+        ]
+    },
+    "271": {
+        "question": {
+            "language": "en",
+            "string": "When was the University of Saskatchewan founded?"
+        },
+        "answer": [
+            "1907-01-01T00:00:00Z"
+        ],
+        "predicted_answer": ": : 1907-01-01",
+        "score": 0.0,
+        "kg": "\nKG Entities:\n\tQ1514848: University of Saskatchewan - public university in Saskatoon, Saskatchewan, Canada\n\nKG EDGES:\nUniversity of Saskatchewan:\n\thas inception: (count 1)\n\t\t1907-01-01T00:00:00Z\n",
+        "trajectory": [
+            "EXPAND_KG: : I should search for the founding date of the University of Saskatchewan.",
+            "SELECT_ENTITIES: ['Q1514848']",
+            "SELECT_RELATION: P571 - has inception",
+            "Observation: 0 new entities, 1 new edges added",
+            "EXPAND_KG: : I should search for the history of the University of Saskatchewan to find more information about its founding date.",
+            "SELECT_ENTITIES: ['Q1514848']",
+            "SELECT_RELATION: P571 - has inception",
+            "Observation: 0 new entities, 0 new edges added",
+            "ANSWER: : 1907-01-01"
+        ]
+    },
+    "273": {
+        "question": {
+            "language": "en",
+            "string": "When was United Fruit Company founded?"
+        },
+        "answer": [
+            "1899-01-01T00:00:00Z"
+        ],
+        "predicted_answer": ": : 1899-01-01",
+        "score": 0.0,
+        "kg": "\nKG Entities:\n\tQ1771942: United Fruit Company - American corporation\n\nKG EDGES:\nUnited Fruit Company:\n\thas inception: (count 1)\n\t\t1899-01-01T00:00:00Z\n",
+        "trajectory": [
+            "EXPAND_KG: : I should search for the founding date of United Fruit Company.",
+            "SELECT_ENTITIES: ['Q1771942']",
+            "SELECT_RELATION: P571 - has inception",
+            "Observation: 0 new entities, 1 new edges added",
+            "EXPAND_KG: : I should search for more information about the United Fruit Company's founding date using a reliable external source.",
+            "SELECT_ENTITIES: ['Q1771942']",
+            "SELECT_RELATION: P571 - has inception",
+            "Observation: 0 new entities, 0 new edges added",
+            "ANSWER: : 1899-01-01"
+        ]
+    },
+    "97": {
+        "question": "How many positions did Kobe Bryant play in his team?",
+        "answer": [
+            "4"
+        ],
+        "predicted_answer": ": : Kobe Bryant played multiple positions in his team.",
+        "score": 0.0,
+        "kg": "\nKG Entities:\n\tQ25369: Kobe Bryant - American basketball player (1978\u20132020)\n\tQ121783: Los Angeles Lakers - American professional basketball team\n\tQ5372: basketball - team sport played on a court with baskets on either end\n\nKG EDGES:\nKobe Bryant:\n\thas member of sports team: (count 1)\n\t\tLos Angeles Lakers\n\thas sport: (count 1)\n\t\tbasketball\n",
+        "trajectory": [
+            "THINK: : Kobe Bryant was a professional basketball player, and it is common for basketball players to play multiple positions depending on the team's needs. To determine how many positions Kobe Bryant played in his team, I should search for information on his career and the positions he played.",
+            "EXPAND_KG: : I should search for the positions Kobe Bryant played in his basketball career.",
+            "SELECT_ENTITIES: ['Q25369']",
+            "SELECT_RELATION: P54 - has member of sports team",
+            "Observation: 1 new entities, 1 new edges added",
+            "EXPAND_KG: : I should search for the positions Kobe Bryant played in his basketball career.",
+            "SELECT_ENTITIES: ['Q25369']",
+            "SELECT_RELATION: P641 - has sport",
+            "Observation: 1 new entities, 1 new edges added",
+            "ANSWER: : Kobe Bryant played multiple positions in his team."
+        ]
+    },
+    "16": {
+        "question": "Did the Chicago Bulls win at least two seasons of the NBA championship?",
+        "answer": "Yes",
+        "predicted_answer": ": : Yes",
+        "score": 1,
+        "kg": "\nKG Entities:\n\tQ128109: Chicago Bulls - American professional basketball team\n\tQ842375: NBA Finals - championship series of the National Basketball Association, annual from 1950; officially includes 1947 to 1949 BAA Finals; officially called the National Basketball Association World Championship Series through 1987\n\tQ517679: 1991\u201392 NBA season - sports season\n\tQ600389: 1990\u201391 NBA season - sports season\n\tQ925570: 1997\u201398 NBA season - sports season\n\tQ1164506: 1992\u201393 NBA season - sports season\n\tQ1321737: 1995\u201396 NBA season - sports season\n\tQ1321749: 1996\u201397 NBA season - sports season\n\tQ4586976: 1991 NBA Finals - 1991 basketball championship series\n\tQ4587787: 1992 NBA Finals - 1992 basketball championship series\n\tQ4588662: 1993 NBA Finals - 1993 basketball championship series\n\tQ4591549: 1996 NBA Finals - 1996 basketball championship series\n\tQ4592610: 1997 McDonald's Championship - sports season\n\tQ4592651: 1997 NBA Finals - 1997 basketball championship series\n\tQ4593827: 1998 NBA Finals - 1998 basketball championship series\n\nKG EDGES:\nChicago Bulls:\n\tis winner of: (count 26)\n\t\t1991\u201392 NBA season\n\t\t1990\u201391 NBA season\n\t\t1997\u201398 NBA season\n\t\t1992\u201393 NBA season\n\t\t1995\u201396 NBA season\n\t\t1996\u201397 NBA season\n\t\t1991 NBA Finals\n\t\t1992 NBA Finals\n\t\t1993 NBA Finals\n\t\t1996 NBA Finals\n\t\t1997 McDonald's Championship\n\t\t1997 NBA Finals\n\t\t1998 NBA Finals\n\t\t1991\u201392 NBA season\n\t\t1990\u201391 NBA season\n\t\t1997\u201398 NBA season\n\t\t1992\u201393 NBA season\n\t\t1995\u201396 NBA season\n\t\t1996\u201397 NBA season\n\t\t1991 NBA Finals\n\t\t1992 NBA Finals\n\t\t1993 NBA Finals\n\t\t1996 NBA Finals\n\t\t1997 McDonald's Championship\n\t\t1997 NBA Finals\n\t\t1998 NBA Finals\n",
+        "trajectory": [
+            "THINK: : The Chicago Bulls are a well-known NBA team and have had a successful history. To answer the query, I need to find out the number of championships they have won. ",
+            "EXPAND_KG: : I will search for the number of NBA championships won by the Chicago Bulls.",
+            "SELECT_ENTITIES: ['Q128109']",
+            "SELECT_RELATION: ~P1346 - is winner of",
+            "Observation: 13 new entities, 13 new edges added",
+            "EXPAND_KG: : I will search for the number of NBA championships won by the Chicago Bulls.",
+            "SELECT_ENTITIES: ['Q128109']",
+            "SELECT_RELATION: ~P1346 - is winner of",
+            "Observation: 0 new entities, 13 new edges added",
+            "ANSWER: : Yes"
+        ]
+    },
+    "339": {
+        "question": "Who is the publisher of Smite ?",
+        "answer": [
+            "Hi-Rez Studios"
+        ],
+        "predicted_answer": ": : Hi-Rez Studios",
+        "score": 1.0,
+        "kg": "\nKG Entities:\n\tQ5750244: Hi-Rez Studios - video-game developer based in Alpharetta, Georgia\n\tQ515279: Tribes: Ascend - first-person shooter video game\n\tQ2357719: Smite - 2014 video game\n\tQ2659257: Global Agenda - 2010 video game\n\tQ27870279: Paladins: Champions of the Realm - 2018 first-person shooter video game\n\tQ55068106: Realm Royale - third-person shooter battle royale video game from 2018\n\tQ67201633: Rogue Company - 2020 video game\n\tQ116209633: Divine Knockout - 2022 video game\n\nKG EDGES:\nHi-Rez Studios:\n\tis publisher of: (count 14)\n\t\tTribes: Ascend\n\t\tSmite\n\t\tGlobal Agenda\n\t\tPaladins: Champions of the Realm\n\t\tRealm Royale\n\t\tRogue Company\n\t\tDivine Knockout\n\t\tTribes: Ascend\n\t\tSmite\n\t\tGlobal Agenda\n\t\tPaladins: Champions of the Realm\n\t\tRealm Royale\n\t\tRogue Company\n\t\tDivine Knockout\n",
+        "trajectory": [
+            "EXPAND_KG: : I should search for the publisher of Smite.",
+            "SELECT_ENTITIES: ['Q5750244']",
+            "SELECT_RELATION: ~P123 - is publisher of",
+            "Observation: 7 new entities, 7 new edges added",
+            "EXPAND_KG: : I should search for the publisher of Smite.",
+            "SELECT_ENTITIES: ['Q5750244']",
+            "SELECT_RELATION: ~P123 - is publisher of",
+            "Observation: 0 new entities, 7 new edges added",
+            "ANSWER: : Hi-Rez Studios"
+        ]
+    }
+}
