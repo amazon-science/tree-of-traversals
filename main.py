@@ -6,13 +6,6 @@ from langchain.callbacks import get_openai_callback
 import llm
 from treeoftraversals import TreeOfTraversals
 
-# import streamlit as st
-#
-# st.title("Tree-of-traversals")
-#
-# text = st.text_input("Enter query:")
-
-
 parser = argparse.ArgumentParser()
 parser.add_argument('--query', type=str, help='Query string')
 parser.add_argument('--sample_breadth', type=int, help='Samples per node', default=1)
@@ -29,17 +22,8 @@ def main(args):
         tree = TreeOfTraversals(llm=model, sample_breadth=args.sample_breadth, max_depth=args.max_depth, knowledge_bases=args.knowledge_bases)
         final_answer = tree.run(query)
     print(final_answer)
-    print(f"Total Tokens: {cb.total_tokens}")
-    print(f"Prompt Tokens: {cb.prompt_tokens}")
-    print(f"Completion Tokens: {cb.completion_tokens}")
-    print(f"Total Cost (USD): ${cb.total_cost}")
     return final_answer, tree
 
 if __name__ == "__main__":
     args = parser.parse_args()
     main(args)
-
-# if text:
-#     answer, tree = main(query=text)
-#     for node in tree.state_tree.traverse():
-#         st.write(node.state.trajectory)
