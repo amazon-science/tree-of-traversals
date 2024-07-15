@@ -27,6 +27,7 @@ dependencies:
   - python_abi=3.11
   - readline=8.2
   - setuptools=68.2.2
+  - streamlit>=1.3.0,<2.0.0
   - tk=8.6.13
   - wheel=0.41.3
   - xz=5.2.6
@@ -125,6 +126,7 @@ dependencies:
       - torch==2.1.0
       - tqdm==4.66.1
       - transformers==4.35.0
+      - treelib==1.7.0
       - typing-extensions==4.8.0
       - typing-inspect==0.9.0
       - tzdata==2023.3
