@@ -7,7 +7,6 @@ This repo contains the code for Tree of Traversals (paper to come)
 ### Environment
 
 `conda env create -f environment.yml`
-(works in testing)
 
 ### Wikimapper (deprecated)
 
@@ -16,6 +15,10 @@ Wikimapper is no longer needed. If this gives any challenges (it shouldn't) feel
 ### OpenAI
 
 Set the environment variable `OPENAI_API_KEY` to your openai api key. Or use any other tool recognized by the openai python package.
+
+## Run Streamlit
+
+`streamlit run streamlit_demo.py`
 
 ## Run the model
 
