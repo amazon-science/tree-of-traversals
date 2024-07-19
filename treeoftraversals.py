@@ -7,6 +7,8 @@ from typing import List
 from SPARQLWrapper import SPARQLExceptions
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import HumanMessage
+from treelib import Node, Tree
+import streamlit as st
 
 import musicbrainz.relation_options
 from musicbrainz.initial_state import match_entities_musicbrainz, mb_prop_to_pprop
@@ -110,6 +112,14 @@ class WikidataTreeState:
         child = copy.deepcopy(self)
         return child
 
+    def get_last_action(self):
+        for event in reversed(self.trajectory):
+            if event.startswith('Observation'):
+                continue
+            else:
+                return event
+        return None
+
     def kg_str(self):
         ent_str = "".join(
             [f"\t{e}: {self.entity_labels[e]} - {self.entity_descriptions[e]}\n" for e in self.entities]
@@ -168,7 +178,14 @@ class StateTreeNode:
 
 
 class TreeOfTraversals:
-    def __init__(self, llm=None, sample_breadth=1, max_depth=7, max_expansions=25, answer_threshold=0.8, knowledge_bases=['wikidata', 'musicbrainz']):
+    def __init__(self, 
+                 llm=None, 
+                 sample_breadth=1, 
+                 max_depth=7, 
+                 max_expansions=25, 
+                 answer_threshold=0.8, 
+                 knowledge_bases=['wikidata', 'musicbrainz'],
+                 use_streamlit=False):
         self.state_tree: StateTreeNode = None
         self.query = None
         self.default_actions = None
@@ -181,11 +198,27 @@ class TreeOfTraversals:
         self.answer_threshold = answer_threshold
         self.max_expansions = max_expansions
         self.knowledge_bases = knowledge_bases
+        self.use_streamlit = use_streamlit
 
     def __getstate__(self):
         state = self.__dict__.copy()
         del state['llm']
         return state
+    
+    def visualize(self):
+        print("Visualizing tree")
+        tree = Tree()
+        tree_nodes = [self.state_tree]
+        while tree_nodes:
+            cur = tree_nodes.pop()
+            action_text = cur.state.get_last_action() if cur.state.trajectory else self.query
+            tree.create_node(f"{cur.order}: {action_text} - Value {cur.value}", cur.order, parent=cur.parent.order if cur.parent else None)
+            tree_nodes.extend(cur.children)
+        if self.use_streamlit:
+            self.use_streamlit['search_tree'].text("Search Tree:\n" + tree.show(stdout=False))
+            self.use_streamlit['knowledge_graph'].text("Knowledge Graph:\n" + self.cur_node.state.kg_str())
+        else:
+            print(tree.show(stdout=False))
 
     def run(self, query):
         self.expansion_count = 0
@@ -193,7 +226,8 @@ class TreeOfTraversals:
         initial_state = self.construct_initial_state(query)
         self.state_tree = StateTreeNode(initial_state)
         self.state_tree.value = 1.0
-        self.cur_node = None
+        self.cur_node = self.state_tree
+        self.visualize()
 
         self.found_answer = False
         while not self.found_answer and self.expansion_count < self.max_expansions:
@@ -213,6 +247,8 @@ class TreeOfTraversals:
             # attempt to generate an answer
 
         best_answer = self.answer_state()
+        self.cur_node = self.answer_node()
+        self.visualize()
         if best_answer is None:
             return "Max expansions. No answer"
         else:
@@ -265,6 +301,8 @@ class TreeOfTraversals:
                 child.set_value(-1.0)  # set value to -1 so it will not be repeated but also can still reach an answer
             else:  # no children generated (e.g. prompt too long)
                 cur_node.set_value(-1.0)
+        self.cur_node = cur_node
+        self.visualize()
 
 
     def initialize_state(self, query, data=None):  # TODO: Refactor and move to TreeOfThoughts
@@ -345,7 +383,7 @@ class TreeOfTraversals:
         return results
 
     def sample_k_outputs(self, prompt, stop='\n', oversample=None, match_pattern=None, max_tokens=None, use_match_as_action=True):
-        print(prompt + "\n")
+        # print(prompt + "\n")
         k = oversample or self.sample_breadth
         results = self.llm(prompt, n=k, stop=stop, max_tokens=max_tokens)
         match_results = results
@@ -356,7 +394,7 @@ class TreeOfTraversals:
             most_common = counts.most_common(n=self.sample_breadth)
             results = [r[0] for r in most_common]
         results = [r.strip() for r in results]
-        print(results)
+        # print(results)
         return results
 
     def sample_default(self, state: WikidataTreeState):
@@ -622,9 +660,9 @@ class TreeOfTraversals:
             kg_state = state.kg_str()
             answer = self.answer_from_state(state)
             full_prompt = EVALUATE_ANSWER_PROMPT.format(query=query, answer=answer, kg_state=kg_state)
-            print(full_prompt)
+            # print(full_prompt)
             result = self.llm(full_prompt, stop=None, n=1, temperature=0)[0]
-            print(result)
+            # print(result)
         else:
             current_prompt = EVALUATE_STATE_PROMPT
             full_prompt = self.construct_full_prompt(current_prompt, state)
@@ -633,7 +671,7 @@ class TreeOfTraversals:
                 return 0.0
             else:
                 result = result[0]
-            print(result)
+            # print(result)
         value_match = re.search("\d\.\d+", result)
         if value_match is None:
             print(f"Could not get value of '{result}'")
@@ -648,7 +686,7 @@ class TreeOfTraversals:
         else:
             return self.llm(prompt, stop=stop)
 
-    def answer_state(self):
+    def answer_node(self):
         # gets "best" answer state
         answer_nodes = []
         for node in self.state_tree.traverse():
@@ -662,7 +700,14 @@ class TreeOfTraversals:
         best_nodes = [a for a in answer_nodes if a.value == best_value]
         best_nodes = sorted(best_nodes, key=lambda x: x.depth)
         best_node = best_nodes[-1]
-        return best_node.state
+        return best_node
+
+    def answer_state(self):
+        # gets "best" answer state
+        answer_node = self.answer_node()
+        if answer_node is None:
+            return None
+        return answer_node.state
 
     @staticmethod
     def answer_from_state(state):
